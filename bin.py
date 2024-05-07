@@ -33,6 +33,7 @@ def bin(gfa_file, output_csv):
             writer.writerow([contig, bin_name])
 
 
+
 input_gfa = "binniginput.GFA"
 output_csv = "bin.csv"
 bin(input_gfa, output_csv)
