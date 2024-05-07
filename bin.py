@@ -13,7 +13,7 @@ def bin(gfa_file, output_csv):
                 contig_name = fields[1]
                 contig_length = int(fields[2])
                 
-                # Assign the contig to a bin based on its length
+                # length
                 if contig_length < 1000:
                     bin_name = 'Bin 1'
                 elif contig_length < 5000:
@@ -25,14 +25,14 @@ def bin(gfa_file, output_csv):
                 
                 contig_bins[contig_name] = bin_name
     
-    # Write the results to a CSV file
+    # csv file
     with open(output_csv, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['Contig', 'Bin'])
         for contig, bin_name in contig_bins.items():
             writer.writerow([contig, bin_name])
 
-# Example usage
+
 input_gfa = "binniginput.GFA"
 output_csv = "bin.csv"
 bin(input_gfa, output_csv)
