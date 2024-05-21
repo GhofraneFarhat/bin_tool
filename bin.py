@@ -1,11 +1,12 @@
 import csv
 from collections import defaultdict
+import sys
 
-def bin(gfa_file, output_csv):
+def bin(input_file, output_file):
 
     contig_bins = defaultdict(str)
     
-    with open(gfa_file, 'r') as file:
+    with open(input_file, 'r') as file:
         for line in file:
             if line.startswith('S'):
                 # Parse the contig name and sequence length
@@ -26,15 +27,21 @@ def bin(gfa_file, output_csv):
                 contig_bins[contig_name] = bin_name
     
     # csv file
-    with open(output_csv, 'w', newline='') as csvfile:
+    with open(output_file, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['Contig', 'Bin'])
         for contig, bin_name in contig_bins.items():
             writer.writerow([contig, bin_name])
 
+    return output_file
 
 
-input_gfa = "binniginput.GFA"
-output_csv = "bin.csv"
-bin(input_gfa, output_csv)
-print(f'Results written to {output_csv}')
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python script.py <input_fasta> <output_fasta>")
+        sys.exit(1)
+
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+    bin(input_file, output_file)
+    print(f"Results written to {output_file}")
