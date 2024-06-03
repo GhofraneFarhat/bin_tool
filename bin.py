@@ -12,7 +12,8 @@ def bin(input_file, output_file):
                 # Parse the contig name and sequence length
                 fields = line.strip().split('\t')
                 contig_name = fields[1]
-                contig_length = int(fields[2])
+                contig_sequence = fields[2]
+                contig_length = len(contig_sequence)
                 
                 # length
                 if contig_length < 1000:
@@ -38,7 +39,7 @@ def bin(input_file, output_file):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python script.py <input_fasta> <output_fasta>")
+        print("Usage: python script.py <input_gfa> <output_csv>")
         sys.exit(1)
 
     input_file = sys.argv[1]
