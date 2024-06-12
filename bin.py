@@ -8,12 +8,17 @@ def bin(input_file, output_file):
     
     with open(input_file, 'r') as file:
         for line in file:
-            if line.startswith('S'):
-                # Parse the contig name and sequence length
-                fields = line.strip().split('\t')
+            fields = line.strip().split('\t')
+                
+                
+            if len(fields) >= 3 and fields[0] == 'S':
                 contig_name = fields[1]
                 contig_sequence = fields[2]
-                contig_length = len(contig_sequence)
+                try:
+                    contig_length = len(contig_sequence)
+                except ValueError:
+                    print(f"Warning: Invalid contig sequence '{contig_sequence}' encountered. Skipping this line.")
+                    continue
                 
                 # length
                 if contig_length < 1000:
